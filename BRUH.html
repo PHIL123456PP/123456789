@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>猜數字遊戲</title>
+</head>
+<body>
+
+    <h1>猜數字遊戲</h1>
+    <p>請猜一個數字（1 到 10）：</p>
+
+    <!-- 用戶輸入 -->
+    <input type="number" id="guess" min="1" max="10" placeholder="1到10之間的數字">
+    <button onclick="checkGuess()">提交</button>
+
+    <p id="feedback"></p>
+
+    <!-- 讓用戶重試 -->
+    <button onclick="resetGame()" style="display:none;" id="resetButton">重新開始遊戲</button>
+
+    <script>
+        // 產生隨機數字
+        let secretNumber = Math.floor(Math.random() * 10) + 1;
+
+        function checkGuess() {
+            const guess = document.getElementById("guess").value;
+            const feedback = document.getElementById("feedback");
+
+            // 檢查猜的數字是否正確
+            if (guess == secretNumber) {
+                feedback.textContent = "恭喜你！猜對了！";
+                document.getElementById("resetButton").style.display = "inline"; // 顯示重玩按鈕
+            } else if (guess < secretNumber) {
+                feedback.textContent = "太小了，再試試看！";
+            } else {
+                feedback.textContent = "太大了，再試試看！";
+            }
+        }
+
+        function resetGame() {
+            // 重設遊戲
+            secretNumber = Math.floor(Math.random() * 10) + 1;
+            document.getElementById("guess").value = "";
+            document.getElementById("feedback").textContent = "";
+            document.getElementById("resetButton").style.display = "none";
+        }
+    </script>
+
+</body>
+</html>
